@@ -1,8 +1,19 @@
+import { db } from '../db';
+import { promptsTable } from '../db/schema';
 import { type Prompt } from '../schema';
 
-export async function getPrompts(): Promise<Prompt[]> {
-    // This is a placeholder declaration! Real code should be implemented here.
-    // The goal of this handler is fetching all prompts from the database,
-    // including their text, description, tags, and timestamps.
-    return [];
-}
+export const getPrompts = async (): Promise<Prompt[]> => {
+  try {
+    // Select all prompts from the database
+    const results = await db.select()
+      .from(promptsTable)
+      .execute();
+
+    // Return the results directly since no numeric conversions are needed
+    // The JSON tags field and other fields are already in the correct format
+    return results;
+  } catch (error) {
+    console.error('Failed to fetch prompts:', error);
+    throw error;
+  }
+};
