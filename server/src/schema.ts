@@ -5,6 +5,7 @@ export const promptSchema = z.object({
   id: z.number(),
   text: z.string(),
   description: z.string().nullable(),
+  image_url: z.string().nullable(),
   tags: z.array(z.string()),
   created_at: z.coerce.date(),
   updated_at: z.coerce.date()
@@ -16,6 +17,7 @@ export type Prompt = z.infer<typeof promptSchema>;
 export const createPromptInputSchema = z.object({
   text: z.string().min(1, "Prompt text is required"),
   description: z.string().nullable(),
+  image_url: z.string().url("Please enter a valid image URL").nullable().optional(),
   tags: z.array(z.string()).default([])
 });
 
@@ -26,6 +28,7 @@ export const updatePromptInputSchema = z.object({
   id: z.number(),
   text: z.string().min(1, "Prompt text is required").optional(),
   description: z.string().nullable().optional(),
+  image_url: z.string().url("Please enter a valid image URL").nullable().optional(),
   tags: z.array(z.string()).optional()
 });
 

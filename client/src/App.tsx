@@ -107,6 +107,7 @@ function App() {
         id: editingPrompt.id,
         text: formData.text,
         description: formData.description,
+        image_url: formData.image_url,
         tags: formData.tags
       };
       const updatedPrompt = await trpc.updatePrompt.mutate(updateData);

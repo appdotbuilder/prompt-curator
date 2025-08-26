@@ -9,6 +9,7 @@ export const createPrompt = async (input: CreatePromptInput): Promise<Prompt> =>
       .values({
         text: input.text,
         description: input.description,
+        image_url: input.image_url ?? null, // Convert undefined to null
         tags: input.tags // JSON array is handled directly by Drizzle
       })
       .returning()

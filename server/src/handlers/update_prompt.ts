@@ -18,6 +18,10 @@ export async function updatePrompt(input: UpdatePromptInput): Promise<Prompt | n
       updateData.description = input.description;
     }
 
+    if (input.image_url !== undefined) {
+      updateData.image_url = input.image_url;
+    }
+
     if (input.tags !== undefined) {
       updateData.tags = input.tags;
     }

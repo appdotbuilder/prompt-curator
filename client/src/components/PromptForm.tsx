@@ -18,6 +18,7 @@ export function PromptForm({ initialData, onSubmit, onCancel, isLoading = false 
   const [formData, setFormData] = useState<CreatePromptInput>({
     text: initialData?.text || '',
     description: initialData?.description || null,
+    image_url: initialData?.image_url,
     tags: initialData?.tags || []
   });
   
@@ -120,6 +121,29 @@ export function PromptForm({ initialData, onSubmit, onCancel, isLoading = false 
             {formData.description.length}/200 characters
           </p>
         )}
+      </div>
+
+      {/* Image URL */}
+      <div className="space-y-2">
+        <label htmlFor="image-url" className="block text-sm font-medium text-gray-700">
+          Generated Image URL <span className="text-gray-400">(optional)</span>
+        </label>
+        <Input
+          id="image-url"
+          type="url"
+          placeholder="https://example.com/generated-image.jpg"
+          value={formData.image_url || ''}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setFormData((prev: CreatePromptInput) => ({
+              ...prev,
+              image_url: e.target.value || undefined
+            }))
+          }
+          className="form-input"
+        />
+        <p className="text-xs text-gray-500">
+          💡 Add a URL to display the generated image result in the prompt card
+        </p>
       </div>
 
       {/* Tags */}
